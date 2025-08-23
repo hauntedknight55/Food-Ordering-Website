@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - FoodHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Hide dashboard by default */
+        #dashboard { display: none; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>    
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-2xl text-orange-500"></i>
+                    <span class="text-2xl font-bold text-gray-800">FoodHub Admin</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <div id="login-section" class="container mx-auto max-w-md mt-20 p-8 bg-white rounded-2xl shadow-lg">
+        <h1 class="text-2xl font-bold text-center mb-6">Admin Login</h1>
+        <div class="space-y-4">
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+            </div>
+            <button id="login-btn" class="w-full bg-orange-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-600 transition duration-300">
+                Login
+            </button>
+            <p id="error-message" class="text-red-500 text-sm text-center"></p>
+        </div>
+    </div>
+
+    <!-- Dashboard Section (Hidden by default) -->
+    <main id="dashboard" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Incoming Orders</h1>
+            <div class="text-lg">Total Orders: <span id="order-count" class="font-bold bg-orange-500 text-white rounded-full px-3 py-1">0</span></div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div id="orders-container" class="space-y-6">
+                <!-- Orders will be dynamically inserted here -->
+                <p id="loading-orders" class="text-center text-gray-500">Loading orders...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    
+    <!-- New JS file for this page -->
+    <script src="admin.js"></script>
+</body>
+</html>

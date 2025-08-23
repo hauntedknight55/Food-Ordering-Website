@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,27 +7,43 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style> body { font-family: 'Inter', sans-serif; } </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        // Prevents the "flash of incorrect theme" on page load
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300 ">
 
-    <header class="bg-white shadow-md sticky top-0 z-40">
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-40">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
-                    <a href="#" class="flex items-center space-x-2">
-                        <i class="fas fa-utensils text-2xl text-orange-500"></i>
-                        <span class="text-2xl font-bold text-gray-800">FoodHub</span>
-                    </a>
-                </div>
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-utensils text-2xl text-orange-500"></i>
+                    <span class="text-2xl font-bold text-gray-800 dark:text-white">FoodHub</span>
+                </a>
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="text-gray-600 hover:text-orange-500 transition duration-150 ease-in-out">Home</a>
-                    <a href="#menu" class="text-gray-600 hover:text-orange-500 transition duration-150 ease-in-out">Menu</a>
-                    <a href="#" class="text-gray-600 hover:text-orange-500 transition duration-150 ease-in-out">About</a>
-                    <a href="#" class="text-gray-600 hover:text-orange-500 transition duration-150 ease-in-out">Contact</a>
+                    <a href="index.html" class="text-orange-500 font-semibold">Home</a>
+                    <a href="index.html#menu" class="text-gray-600 dark:text-gray-300 hover:text-orange-500">Menu</a>
+                    <a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-orange-500">About</a>
+                    <a href="contact.html" class="text-gray-600 dark:text-gray-300 hover:text-orange-500">Contact</a>
                 </nav>
-                <div class="flex items-center">
-                    <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                        <i class="fas fa-shopping-cart text-xl text-gray-600"></i>
+
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    </button>
+                    <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-shopping-cart text-xl text-gray-600 dark:text-gray-300"></i>
                         <span id="cart-count" class="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-orange-500 rounded-full">0</span>
                     </button>
                 </div>
@@ -35,85 +51,54 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-        <div class="bg-black bg-opacity-50 p-8 rounded-xl">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Craving Something Delicious?</h1>
-            <p class="text-lg text-gray-200 mb-8">Order from the best chefs in town, delivered right to your door.</p>
-            <a href="#menu" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">View Menu</a>
-        </div>
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
+        <!-- <section class="text-center bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg mb-12" style="background-image: url('https://placehold.co/1200x400/FFF4E6/333333?text=Delicious+Food+Awaits'); background-size: cover; background-position: center;"> -->
+             <div class="bg-black bg-opacity-50 p-8 rounded-xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Craving Something Delicious?</h1>
+                <p class="text-lg text-gray-200 mb-8">Order from the best chefs in town, delivered right to your door.</p>
+                <a href="#menu" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">View Menu</a>
+            </div>
+        <!-- </section> -->
 
         <section id="menu">
             <h2 class="text-3xl font-bold text-center mb-4">Our Menu</h2>
-            <p class="text-center text-gray-500 mb-8">Explore our wide range of dishes, crafted with the finest ingredients.</p>
-            
+            <p class="text-center text-gray-500 dark:text-gray-400 mb-8">Explore our wide range of dishes, crafted with the finest ingredients.</p>
             <div id="category-filters" class="flex justify-center flex-wrap gap-3 mb-10"></div>
-
             <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
         </section>
     </main>
 
-    <footer class="bg-gray-800 text-white mt-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">FoodHub</h3>
-                    <p class="text-gray-400">Your daily dose of deliciousness. Freshly prepared, delivered fast.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-                    <ul>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Menu</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
-                <p>&copy; 2025 FoodHub. All Rights Reserved.</p>
-            </div>
+   <footer class="bg-gray-800 dark:bg-black mt-16">
+        <div class="container mx-auto py-12 text-center text-gray-500">
+             <p>&copy; 2025 FoodHub. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full">
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-gray-800 shadow-2xl z-50 transform translate-x-full">
         <div class="flex flex-col h-full">
-            <div class="flex justify-between items-center p-5 border-b">
+            <div class="flex justify-between items-center p-5 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-2xl font-bold">Your Cart</h3>
-                <button id="close-cart-button" class="p-2 rounded-full hover:bg-gray-200">
+                <button id="close-cart-button" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            
-            <div id="cart-items" class="flex-grow p-5 overflow-y-auto custom-scrollbar">
-
-                <div id="empty-cart-message" class="text-center text-gray-500 mt-10">
-                    <i class="fas fa-shopping-basket text-4xl mb-4"></i>
-                    <p>Your cart is empty.</p>
-                    <p class="text-sm">Add some delicious food to get started!</p>
-                </div>
-            </div>
-            
-            <div class="p-5 border-t">
+            <div id="cart-items" class="flex-grow p-5 overflow-y-auto"></div>
+            <div class="p-5 border-t border-gray-200 dark:border-gray-700">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-lg font-medium">Subtotal</span>
                     <span id="cart-subtotal" class="text-xl font-bold">₹0.00</span>
                 </div>
-                <button class="w-full bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-orange-600 transition duration-300">
+                <button id="checkout-btn" class="w-full bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-orange-600">
                     Proceed to Checkout
                 </button>
             </div>
         </div>
     </div>
     <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
+    <script src="theme.js"></script>
 </body>
 </html>
-

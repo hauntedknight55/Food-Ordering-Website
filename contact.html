@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FoodHub</title> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300 flex flex-col min-h-screen">
+
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+               <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-utensils text-2xl text-orange-500"></i>
+                    <span class="text-2xl font-bold text-gray-800">FoodHub</span>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-orange-500">Home</a>
+                    <a href="index.html#menu" class="text-gray-600 dark:text-gray-300 hover:text-orange-500">Menu</a>
+                    <a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-orange-500">About</a>
+                    <a href="contact.html" class="text-orange-500 font-semibold">Contact</a>
+                </nav>
+                <div class="flex items-center">
+                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5">
+                       <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                       <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                   </button>
+                    <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                        <i class="fas fa-shopping-cart text-xl text-gray-600"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-orange-500 rounded-full">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+        <div class="bg-white dark:bg-gray-800 p-8 sm:p-12 rounded-2xl shadow-lg">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800 dark:text-white mb-6">Get In Touch</h1>
+            <p class="text-lg text-center text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+                Have a question, a suggestion, or just want to say hello? We'd love to hear from you! Reach out to us anytime.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <form id="contact-form">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+                                <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-orange-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-600 transition duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <p id="success-message" class="mt-4 text-center text-green-500 font-semibold"></p>
+                </div>
+                <div class="space-y-8">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-2xl text-orange-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold">Our Address</h3>
+                            <p class="text-gray-600">Meenaxi Complex, Deshpande Nagar<br>Hubballi, Karnataka 580029</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-envelope text-2xl text-orange-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold">Email Us</h3>
+                            <p class="text-gray-600">contact@foodhub.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-phone text-2xl text-orange-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold">Call Us</h3>
+                            <p class="text-gray-600">+91 12345 67890</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+     <footer class="bg-gray-800 dark:bg-black ">
+        <div class="container mx-auto py-12 text-center text-gray-500">
+            <p>&copy; 2025 FoodHub. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="theme.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>
